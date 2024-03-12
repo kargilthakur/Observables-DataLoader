@@ -7,7 +7,7 @@ export async function loadDataCommons(apiKey, dcid, property)
 }
 
 // Display function for CSV data
-function displayTableCSV(data) {
+export function displayTableCSV(data) {
   const table = document.createElement("table");
   const thead = document.createElement("thead");
   const tbody = document.createElement("tbody");
@@ -35,38 +35,68 @@ function displayTableCSV(data) {
   table.appendChild(tbody);
 }
 
-// Function to display property data in tabular format
+// Function to display JSON data in tabular format
 export function displayJsonData(data) {
   const resultContainer = document.getElementById('resultContainer');
 
   // Clear previous content
   resultContainer.innerHTML = '';
 
-  // Check if the data structure is valid
-  if (data && data.data) {
-    const properties = data.data['geoId/06'].properties;
-
+  // Check if the data is valid
+  if (data) {
     // Create a table element
     const table = document.createElement('table');
 
-    // Create a header row
-    const headerRow = table.insertRow();
-    const headerCell = headerRow.insertCell();
-    headerCell.textContent = 'Properties';
+    // Handle JSON objects
+    if (typeof data === 'object') {
+      // Create header row
+      const headerRow = table.insertRow();
+      const headerCell = headerRow.insertCell();
+      headerCell.textContent = 'Key';
+      const headerCell2 = headerRow.insertCell();
+      headerCell2.textContent = 'Value';
 
-    // Create rows for each property
-    for (const property of properties) {
+      // Recursively add rows for each key-value pair
+      displayJsonObject(data, table);
+    } else {
+      // Display a single row for non-object data
       const row = table.insertRow();
       const cell = row.insertCell();
-      cell.textContent = property;
+      cell.textContent = data;
     }
 
     // Append the table to the result container
     resultContainer.appendChild(table);
   } else {
-    // Display an error message if the data structure is not as expected
+    // Display an error message if the data is not as expected
     resultContainer.textContent = 'Invalid data structure';
   }
 }
+
+// Recursive function to display JSON object properties
+function displayJsonObject(obj, table) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const row = table.insertRow();
+      const keyCell = row.insertCell();
+      keyCell.textContent = key;
+
+      const valueCell = row.insertCell();
+      const value = obj[key];
+
+      if (typeof value === 'object') {
+        // If the value is an object, recursively add rows
+        const nestedTable = document.createElement('table');
+        valueCell.appendChild(nestedTable);
+        displayJsonObject(value, nestedTable);
+      } else {
+        // Display the value in a cell
+        valueCell.textContent = value;
+      }
+    }
+  }
+}
+
+
 
 

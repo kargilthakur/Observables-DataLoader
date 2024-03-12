@@ -41,6 +41,12 @@ The loader requires two inputs - `dcid` and `property`.
 
 For more API request examples, check the [Data Commons API documentation](https://docs.datacommons.org/api/rest/v2/node).
 
+Data can be directly downloaded in csv files using this [link](https://datacommons.org/tools/download)
+
+Plots from Data Commons Web Components can be also fetched directly using [this](https://docs.datacommons.org/api/web_components/)
+
+[Google Data Commons Place Browser](https://datacommons.org/place)
+
 ## API Key
 
 The API key used in the example is a public one. To obtain your own API key, apply through [this link](https://docs.google.com/forms/d/e/1FAIpQLSeVCR95YOZ56ABsPwdH1tPAjjIeVDtisLF-8oDYlOxYmNZ7LQ/viewform). Additional information on getting the API key can be found [here](https://docs.datacommons.org/api/rest/v2/getting_started#getting-api-keys).

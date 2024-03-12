@@ -74,7 +74,6 @@ toc: false
         loadDataCommons(apiKey, dcidInput, propertyInput).then(data => {
             console.log(data);
             displayJsonData(data);
-
             })
                 .catch(error => {
                     console.error('Error loading data:', error);
@@ -83,7 +82,5 @@ toc: false
     }
   );
 ```
-
-
 
 ---
